@@ -88,12 +88,44 @@ class Translator {
         let spanStart = '<span class="highlight">';
         let spanEnd = '</span>'; 
 
-        if(locale == 'american-to-british') {
+        let translatedText = text;
 
+        if(locale == 'american-to-british') {
+            let aOnly = Object.entries(americanOnly);
+            let a2bSpelling = Object.entries(americanToBritishSpelling);
+
+            aOnly.forEach((term) => {
+                translatedText = translatedText.replace(new RegExp(term[0], 'gi'), spanStart + term[1] + spanEnd);
+            });
+
+            a2bSpelling.forEach((term) => {
+                translatedText = translatedText.replace(new RegExp(term[0], 'gi'), spanStart + term[1] + spanEnd);
+            });
+
+            // for(let i = 0; i < aOnly.length; i++) {
+            //     translatedText = translatedText.replace(new RegExp(title, 'gi'), spanStart + aOnly[i][1] + spanEnd);
+            // }
+
+            // let arr = text.split(' ');
+
+            // for(let i = 0; i < arr.length; i++) {
+            //     if(americanOnly.hasOwnProperty(arr[i])) {
+            //         console.log(americanOnly[arr[i]]);
+            //     }
+            // }
         }
 
         if(locale == 'british-to-american') {
-            
+            let a2bSpelling = Object.entries(americanToBritishSpelling);
+            let bOnly = Object.entries(britishOnly);
+
+            a2bSpelling.forEach((term) => {
+                translatedText = translatedText.replace(new RegExp(term[1], 'gi'), spanStart + term[0] + spanEnd);
+            }); 
+
+            bOnly.forEach((term) => {
+                translatedText = translatedText.replace(new RegExp(term[0], 'gi'), spanStart + term[1] + spanEnd);
+            });
         }
 
         // console.log(translatedText);
