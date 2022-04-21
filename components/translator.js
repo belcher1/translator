@@ -11,11 +11,12 @@ class Translator {
         let spanStart = '<span class="highlight">';
         let spanEnd = '</span>';        
 
-        let timeRegex = /[0-2]*[0-9][:\.][0-5][0-9]/g;
+        let timeRegex = /[0-2]*[0-9][:\\.][0-5][0-9]/g;
+        let result = timeRegex.test(text)
 
         let translatedTime = text;
 
-        if(timeRegex.test(text) && locale == 'american-to-british') {
+        if(result && locale == 'american-to-british') {
 
             let matches = text.match(timeRegex);
             let newTimes =[]; 
@@ -31,13 +32,18 @@ class Translator {
             }
         }
 
-        if(timeRegex.test(text) && locale == 'british-to-american') {
+        // console.log('test');
+        // console.log(timeRegex.test(text));
+
+        // Random comment
+        if(result && locale == 'british-to-american') {
 
             let matches = text.match(timeRegex);
             let newTimes =[]; 
 
             // console.log(matches);
             // console.log(matches.length);
+            // console.log('test');
 
             for(let i = 0; i < matches.length; i++) {
                 newTimes.push(matches[i].replace('.', ':'));
@@ -47,7 +53,7 @@ class Translator {
             }
         }
 
-        console.log(translatedTime);
+        // console.log(translatedTime);
         return translatedTime;
     }
 
@@ -57,7 +63,7 @@ class Translator {
 
         // let obj = americanToBritishTitles;
 
-        let spanStart = "<span class='highlight'>";
+        let spanStart = '<span class="highlight">';
         let spanEnd = '</span>'; 
 
         let americanTitles = Object.keys(americanToBritishTitles);
@@ -81,12 +87,12 @@ class Translator {
             });
         }
 
-        console.log(translatedText);
+        // console.log(translatedText);
         return translatedText;
     }
 
     translate(text, locale) {
-        let spanStart = "<span class='highlight'>";
+        let spanStart = '<span class="highlight">';
         let spanEnd = '</span>'; 
 
         let translatedText = text;
@@ -121,15 +127,16 @@ class Translator {
             let bOnly = Object.entries(britishOnly);
 
             a2bSpelling.forEach((term) => {
-                translatedText = translatedText.replace(new RegExp(term[1], 'gi'), spanStart + term[0] + spanEnd);
+                translatedText = translatedText.replace(new RegExp(term[1] + ' ', 'gi'), spanStart + term[0] + spanEnd + ' ');
             }); 
 
             bOnly.forEach((term) => {
-                translatedText = translatedText.replace(new RegExp(term[0], 'gi'), spanStart + term[1] + spanEnd);
+                translatedText = translatedText.replace(new RegExp(term[0] + '\\s', 'gi'), spanStart + term[1] + spanEnd + ' ');
+                translatedText = translatedText.replace(new RegExp(term[0] + '\\.', 'gi'), spanStart + term[1] + spanEnd + '.');
             });
         }
 
-        console.log(translatedText);
+        // console.log(translatedText);
         return translatedText;
     }
 }

@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.route('/api/translate')
     .post((req, res) => {
 
-      // console.log(req.body);
+      console.log(req.body);
 
       let text = req.body.text;
       let locale = req.body.locale;
@@ -43,6 +43,7 @@ module.exports = function (app) {
         return res.json({text: text, translation: 'Everything looks good to me!'});
       }
 
+      console.log({text: text, translation: translation});
       return res.json({text: text, translation: translation});
     });
 };
