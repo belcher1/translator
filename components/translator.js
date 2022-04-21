@@ -47,6 +47,7 @@ class Translator {
             }
         }
 
+        console.log(translatedTime);
         return translatedTime;
     }
 
@@ -56,7 +57,7 @@ class Translator {
 
         // let obj = americanToBritishTitles;
 
-        let spanStart = '<span class="highlight">';
+        let spanStart = "<span class='highlight'>";
         let spanEnd = '</span>'; 
 
         let americanTitles = Object.keys(americanToBritishTitles);
@@ -80,12 +81,12 @@ class Translator {
             });
         }
 
-        // console.log(translatedText);
+        console.log(translatedText);
         return translatedText;
     }
 
     translate(text, locale) {
-        let spanStart = '<span class="highlight">';
+        let spanStart = "<span class='highlight'>";
         let spanEnd = '</span>'; 
 
         let translatedText = text;
@@ -128,7 +129,7 @@ class Translator {
             });
         }
 
-        // console.log(translatedText);
+        console.log(translatedText);
         return translatedText;
     }
 }
